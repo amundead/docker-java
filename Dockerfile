@@ -8,17 +8,20 @@ RUN apk update && apk add --no-cache openjdk17 shadow
 ENV JAVA_HOME=/usr/lib/jvm/java-17-openjdk
 ENV PATH="$JAVA_HOME/bin:${PATH}"
 
-# Configure Docker to run as non-root user
-#RUN groupadd docker
-#RUN usermod -aG docker $USER
+# Create the docker group (if not created by default)
+#RUN addgroup -S docker
 
-# Enable DinD
-RUN mkdir -p /var/lib/docker
-VOLUME /var/lib/docker
+# Create a new user and group
+#RUN addgroup -S mygroup && adduser -S myuser -G mygroup
 
-# Run the container as root to perform Docker-related tasks
+# Add the new user (myuser) to the docker group
+#RUN usermod -aG docker myuser
+
+# Set the working directory
+#WORKDIR /app
+
+# Ensure the container runs as root or switch to myuser (if necessary)
 USER root
 
-# Start Docker daemon inside the container (DinD)
+# Start the Docker daemon (DinD setup)
 CMD ["dockerd-entrypoint.sh"]
-
