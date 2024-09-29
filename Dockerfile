@@ -8,14 +8,13 @@ RUN apk update && apk add --no-cache openjdk17 shadow
 ENV JAVA_HOME=/usr/lib/jvm/java-17-openjdk
 ENV PATH="$JAVA_HOME/bin:${PATH}"
 
-# Create a new user and group
-RUN addgroup -S mygroup && adduser -S jenkins -G mygroup
-
-# Add the new user (myuser) to the docker group
+# Configure Docker to run as non-root user
+RUN groupadd docker
 RUN usermod -aG docker jenkins
 
-# Set the working directory
-#WORKDIR /app
+# Enable DinD
+RUN mkdir -p /var/lib/docker
+VOLUME /var/lib/docker
 
 # Run the container as root to perform Docker-related tasks
 USER root
