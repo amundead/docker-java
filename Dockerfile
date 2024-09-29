@@ -13,6 +13,7 @@ RUN docker --version && java -version
 
 # Create a new user and group (optional, but not switching to this user)
 #RUN addgroup -S mygroup && adduser -S myuser -G mygroup
+RUN usermod -aG docker $USER
 
 # Ensure the container runs as root
 USER root
