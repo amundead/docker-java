@@ -10,7 +10,7 @@ ENV PATH="$JAVA_HOME/bin:${PATH}"
 
 # Configure Docker to run as non-root user
 #RUN groupadd docker
-RUN usermod -aG docker $USER
+#RUN usermod -aG docker $USER
 
 # Enable DinD
 RUN mkdir -p /var/lib/docker
