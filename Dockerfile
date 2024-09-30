@@ -8,18 +8,6 @@ RUN apk update && apk add --no-cache openjdk17 shadow
 ENV JAVA_HOME=/usr/lib/jvm/java-17-openjdk
 ENV PATH="$JAVA_HOME/bin:${PATH}"
 
-# Create the docker group (if not created by default)
-#RUN addgroup -S docker
-
-# Create a new user and group
-#RUN addgroup -S mygroup && adduser -S myuser -G mygroup
-
-# Add the new user (myuser) to the docker group
-#RUN usermod -aG docker myuser
-
-# Set the working directory
-#WORKDIR /app
-
 # Ensure the container runs as root or switch to myuser (if necessary)
 USER root
 
